@@ -11,7 +11,11 @@ Whitelist.Config["disconnectmessage"] = "You're not whitelisted on this server!"
 
 Whitelist.Config["chatprefix"] = "/" // Set chat command prefix.
 
-Whitelist.Config["usejson"] = true // Set to false to use the alternative slow saving method, but if you feel the burning desire to not use JSON for any reason, set this to false.
+Whitelist.Config["savetype"] = "von" // Change this to the savetype // Available Savetypes in order of reliability.
+
+ // von \\
+ // json \\
+// string \\
 
 // MYSQL FUNCTIONALITY \\
 
