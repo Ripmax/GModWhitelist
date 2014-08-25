@@ -15,7 +15,7 @@ Whitelist.Config["chatprefix"] = "/" // Set chat command prefix.
 
 Whitelist.Config["mysql"]["enable"] = false
 
-Whitelist.Config["mysql"]["host"] = "127.0.0.1"
+Whitelist.Config["mysql"]["host"] = "127.0.0.1:3306"
 
 Whitelist.Config["mysql"]["user"] = "root"
 
