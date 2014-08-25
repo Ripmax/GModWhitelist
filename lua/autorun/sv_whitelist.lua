@@ -8,4 +8,6 @@ include("whitelist/chatcmd.lua")
 include("whitelist/saveload.lua")
 include("whitelist/joinauth.lua")
 
+include("whitelist/modules/von.lua")
+
 Msg("        // LOADED \\\n")
