@@ -13,13 +13,14 @@ Whitelist.Config["chatprefix"] = "/" // Set chat command prefix.
 
 Whitelist.Config["savetype"] = "von" // Change this to the savetype // Available Savetypes in order of reliability.
 
- // von \\
- // json \\
-// string \\
+                // sqllite \\
+               //    von    \\
+              //    json     \\
+             //    string     \\
 
 // MYSQL FUNCTIONALITY \\
 
-Whitelist.Config["mysql"]["enable"] = false
+Whitelist.Config["mysql"]["enable"] = false // Set to true to use mysql (Will override savetype option)
 
 Whitelist.Config["mysql"]["host"] = "127.0.0.1:3306"
 

@@ -1,6 +1,7 @@
 local config = Whitelist.Config
 local config_sql = config["mysql"]
 local useSQL = config_sql["enable"]
+local savetype = config["savetype"]:lower()
 local connected = false
 
 function Whitelist:ConnectToDB()
