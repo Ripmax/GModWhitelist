@@ -18,7 +18,7 @@ end
 local __check = function(sid64, ipa, svp, clp, n)
 	if(svp != "") then
 		if(clp != svp) then
-			return false, "#GameUI_ServerRejectBadPassword" // Lets not remove password functionality, shall we?
+			return false, "#GameUI_ServerRejectBadPassword"
 		end
 	end
 	
