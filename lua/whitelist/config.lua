@@ -22,7 +22,3 @@ Whitelist.Config["mysql"]["user"] = "root"
 Whitelist.Config["mysql"]["password"] = ""
 
 Whitelist.Config["mysql"]["database"] = "whitelist"
-
-// Advanced Settings
-
-Whitelist.Config["mysql"]["module"] = "mysqloo"
