@@ -3,7 +3,7 @@ local hook = hook
 local wl = Whitelist
 local config = wl.Config
 
-function Whitelist:CheckPlayer(id, id64)
+function wl:CheckPlayer(id, id64)
 	if(table.HasValue(wl.List, id)) then
 		return true
 	else
@@ -33,7 +33,3 @@ local __check = function(sid64, ipa, svp, clp, n)
 end
 
 hook.Add("CheckPassword",__check)
-	
-	
-	
-	
