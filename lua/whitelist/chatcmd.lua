@@ -1,20 +1,8 @@
 local string = string
 local hook = hook
 local table = table
-local wl = Whitelist
-local config = wl.Config
+local config = Whitelist.Config
 local meta = FindMetaTable("Player")
-
-local function meta:HasPermission()
-	local Player = self
-	if(!Player || !IsValid(Player)) then return false end
-	
-	if(config["usegroups"]) then
-		return table.HasValue(config["groups"],Player:GetUserGroup())
-	else
-		return (config["superadmin"] and Player:IsSuperAdmin() or Player:IsAdmin())
-	end
-end
 
 local function Parse(text)
 	local text = text:lower()
@@ -37,11 +25,11 @@ hook.Add("PlayerSay",function(Player, text, t)
 		if(s == "whitelist") then
 			if(!arg || arg == "" || arg == " ") then
 				Player:PrintMessage(HUD_PRINTTALK, "Correct usage " .. config["chatprefix"] .. "whitelist <cmd>")
-			elseif(!table.HasValue(arg,wl.Commands)) then
+			elseif(!table.HasValue(arg,Whitelist.Commands)) then
 				Player:PrintMessage(HUD_PRINTTALK, "Unknown command!")
 				Player:PrintMessage(HUD_PRINTTALK, "Listing all commands to console")
 				Player:PrintMessage(HUD_PRINTCONSOLE, "Available commands")
-				for k, v in pairs(wl.Commands) do
+				for k, v in pairs(Whitelist.Commands) do
 					Player:PrintMessage(HUD_PRINTCONSOLE, config["chatprefix"] .. "whitelist " .. v)
 				end
 			end
