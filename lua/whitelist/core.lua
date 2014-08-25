@@ -1,7 +1,6 @@
 Whitelist = {}
 Whitelist.Commands = {"add","remove","view","on","off"}
 Whitelist.List = {}
-Whitelist.List.SixtyFour = {}
 
 function Whitelist:HasPermission(Player)
 	local Player = self
@@ -15,13 +14,5 @@ function Whitelist:HasPermission(Player)
 end
 
 function Whitelist:CheckPlayer(id, id64)
-	if(table.HasValue(Whitelist.List, id)) then
-		return true
-	else
-		if(table.HasValue(Whitelist.List.SixtyFour, id64)) then // Probably useless.
-			return true
-		else
-			return false
-		end
-	end
+	return table.HasValue(Whitelist.List, id) or false
 end

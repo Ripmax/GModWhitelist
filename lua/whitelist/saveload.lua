@@ -5,6 +5,10 @@ local connected = false
 
 function Whitelist:ConnectToDB()
 	Whitelist.DB = {}
+	if(!useSQL) then
+		Whitelist.DB.Connection = false
+		return false
+	end
 	require("mysqloo")
 	if(!mysqloo) then Error("MySQLOO Failed to load!") end
 
@@ -18,6 +22,7 @@ function Whitelist:ConnectToDB()
 	local dataB = Whitelist.DB.Connection
 	
 	function dataB:onConnected()
+		connected = true
 		Msg("Successfully connected to database " .. config_sql["host"] .. "\n")
 		
 		local qy = self:query("SELECT * FROM whitelist")
@@ -32,4 +37,21 @@ function Whitelist:ConnectToDB()
 		end
 		
 		qy:start()
+	end
+	return connected
+end
+
+function Whitelist:Save()
+	if(useSQL) then
+		// SQL SAVING CODE HERE
+	else
+		local savestring
+		if(config["usejson"]) then
+			savestring = util.TableToJson(Whitelist.List)
+		else
+			for k, v in pairs(Whitelist.List) do
+				savestring = savestring .. "\n" .. v
+			end
+		end
+	end
 end
