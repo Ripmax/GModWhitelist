@@ -81,3 +81,22 @@ function Whitelist:Save()
 			
 	end
 end
+
+function Whitelist:Load()
+	if(useSQL) then
+		// SQL LOADING CODE HERE
+	else
+		local loadstring
+		local lt = config["savetype"]:lower()
+		
+		if(lt == "sqlite") then
+			if(!sql.TableExists) then
+				Msg("[SQLITE] Table 'whitelist' does not exist, creating!\n") // debugging
+				local qy = [[CREATE TABLE IF NOT EXISTS `whitelist` (
+					`steamid` varchar(18) NOT NULL,
+					PRIMARY KEY (`steamid`),
+					) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Whitelist Table';]]
+						
+				sql.Query(qy)
+			else
+			
