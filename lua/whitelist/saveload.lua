@@ -58,7 +58,7 @@ function Whitelist:Save()
 					) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Whitelist Table';]]
 					
 				sql.Query(qy)
-				timer.Simple(1.5, function()
+				timer.Simple(1.25, function()
 					sql.Query("BEGIN")
 					for k, v in pairs(Whitelist.List) do
 						sql.Query("INSERT INTO whitelist (`steamid`) VALUES ('" .. v .. "')")
@@ -66,8 +66,8 @@ function Whitelist:Save()
 					timer.Simple(0.2, function() sql.Query("COMMIT") end)
 				end)
 			else
-				timer.Simple(1, function() sql.Query("TRUNCATE TABLE whitelist") end)
-				timer.Simple(1.5, function()
+				sql.Query("TRUNCATE TABLE whitelist")
+				timer.Simple(1.25, function()
 					sql.Query("BEGIN")
 					for k, v in pairs(Whitelist.List) do
 						sql.Query("INSERT INTO whitelist (`steamid`) VALUES ('" .. v .. "')")
