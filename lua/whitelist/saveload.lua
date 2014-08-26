@@ -78,7 +78,13 @@ function Whitelist:Save()
 		elseif(st == "von") then savestring = von.serialise(Whitelist.List)
 		elseif(st == "json") then savestring = util.TableToJSON(Whitelist.List)
 		elseif(st == "string") then for k, v in pairs(Whitelist.List) do savestring = savestring .. "\n" .. v end
-			
+		
+		if(st != "sqlite") then
+			if(!file.Exists("data/whitelist", "GAME")) then
+				file.CreateDir("whitelist")
+			end
+			timer.Simple(0.25, function() file.Write("whitelist/list.txt", savestring) end)
+		end
 	end
 end
 
@@ -99,4 +105,13 @@ function Whitelist:Load()
 						
 				sql.Query(qy)
 			else
+				// finish this
+			end
+		else
+			if(!file.Exists("data/whitelist", "GAME")) then
+				file.CreateDir("whitelist")
+			end
+			loadstring = file.Read("whitelist/list.txt", "DATA")
+			
+			
 			
