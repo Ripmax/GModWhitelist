@@ -47,12 +47,37 @@ function Whitelist:Save()
 		// SQL SAVING CODE HERE
 	else
 		local savestring
-		if(config["usejson"]) then
-			savestring = util.TableToJson(Whitelist.List)
-		else
-			for k, v in pairs(Whitelist.List) do
-				savestring = savestring .. "\n" .. v
+		local st = config["savetype"]:lower()
+		
+		if(st == "sqlite") then 
+			if(!sql.TableExists) then
+				Msg("[SQLITE] Table 'whitelist' does not exist, creating!\n") // debugging
+				local qy = [[CREATE TABLE IF NOT EXISTS `whitelist` (
+					`steamid` varchar(18) NOT NULL,
+					PRIMARY KEY (`steamid`),
+					) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Whitelist Table';]]
+					
+				sql.Query(qy)
+				timer.Simple(1.5, function()
+					sql.Query("BEGIN")
+					for k, v in pairs(Whitelist.List) do
+						sql.Query("INSERT INTO whitelist (`steamid`) VALUES ('" .. v .. "')")
+					end
+					timer.Simple(0.2, function() sql.Query("COMMIT") end)
+				end)
+			else
+				timer.Simple(1, function() sql.Query("TRUNCATE TABLE whitelist") end)
+				timer.Simple(1.5, function()
+					sql.Query("BEGIN")
+					for k, v in pairs(Whitelist.List) do
+						sql.Query("INSERT INTO whitelist (`steamid`) VALUES ('" .. v .. "')")
+					end
+					timer.Simple(0.2, function() sql.Query("COMMIT") end)
+				end)
 			end
-		end
+		elseif(st == "von") then savestring = von.serialise(Whitelist.List)
+		elseif(st == "json") then savestring = util.TableToJSON(Whitelist.List)
+		elseif(st == "string") then for k, v in pairs(Whitelist.List) do savestring = savestring .. "\n" .. v end
+			
 	end
 end
