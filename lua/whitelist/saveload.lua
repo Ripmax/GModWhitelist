@@ -50,7 +50,7 @@ function Whitelist:Save()
 		local st = config["savetype"]:lower()
 		
 		if(st == "sqlite") then 
-			if(!sql.TableExists) then
+			if(!sql.TableExists("whitelist")) then
 				Msg("[SQLITE] Table 'whitelist' does not exist, creating!\n") // debugging
 				local qy = [[CREATE TABLE IF NOT EXISTS `whitelist` (
 					`steamid` varchar(18) NOT NULL,
@@ -90,7 +90,7 @@ function Whitelist:Load()
 		local lt = config["savetype"]:lower()
 		
 		if(lt == "sqlite") then
-			if(!sql.TableExists) then
+			if(!sql.TableExists("whitelist")) then
 				Msg("[SQLITE] Table 'whitelist' does not exist, creating!\n") // debugging
 				local qy = [[CREATE TABLE IF NOT EXISTS `whitelist` (
 					`steamid` varchar(18) NOT NULL,
