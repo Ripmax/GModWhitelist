@@ -105,13 +105,22 @@ function Whitelist:Load()
 						
 				sql.Query(qy)
 			else
-				// finish this
+				local qy = [[SELECT * FROM `whitelist`]]
+				local res = sql.Query(qy)
+				if(res[1] || res[1][1]) then
+					Whitelist.Data = res
+				end
 			end
 		else
 			if(!file.Exists("data/whitelist", "GAME")) then
 				file.CreateDir("whitelist")
 			end
 			loadstring = file.Read("whitelist/list.txt", "DATA")
-			
-			
-			
+			local data = von.decode(loadstring)
+			if(!data) then
+				print("[GMWL] Unable to load from file")
+				print("[GMWL] Von Error: " .. von.error())
+			end
+		end
+	end
+end
